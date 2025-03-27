@@ -6,7 +6,7 @@ $META_TITLE = "5Fs Group - Nền tảng học ngoại ngữ online";
 $META_IMAGE = "https://i.imgur.com/Ldhl3hK.png";
 $META_DESCRIPTION = "5Fs Group - Nền tảng học ngoại ngữ online";
 $META_SITE = BASE_URL("");
-require_once(__DIR__ . "/public/client/header.php");
+require_once(__DIR__ . "/public/client/header-home.php");
 require 'vendor/autoload.php';
 
 $debugbar = new DebugBar\StandardDebugBar();
@@ -18,364 +18,273 @@ $soLuongHocVien = $Database->get_row("select count(*) as SoLuong from nguoidung 
 ?>
 
 <style>
-    <?= include_once(__DIR__ . "/assets/css/main.css");
-    ?>
+<?=include_once(__DIR__ . "/assets/css/home.css");
+?>
 </style>
-<div class="header">
-    <div class="grid wide">
-        <div class="header_wrap">
-            <a href="<?= BASE_URL("/") ?>">
-                <h2 class="header__name"><?= $Database->site("TenWeb") ?></h2>
-            </a>
-            <div class="nav">
-                <a href="#" class="nav__course">Các khóa học </a>
-                <?php
-                if (isset($_SESSION["account"])) {
-                ?>
-                    <a href="<?= BASE_URL("Page/Home") ?>" class="nav__statr btn">Bắt đầu học</a>
-                <?php
-                } else {
-                ?>
-                    <a href="<?= BASE_URL("Auth/DangNhap") ?>" class="nav__statr btn">Bắt đầu học</a>
-                <?php
-                }
-                ?>
-            </div>
-        </div>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <a href="<?= BASE_URL("/") ?>" style="text-decoration: none; color: wheat;">
+            <h1><?= $Database->site("TenWeb") ?></h1>
+        </a>
+        <h2>Học ngoại ngữ và cải thiện kĩ năng của bản thân bạn</h2>
+        <p>Ngoại ngữ nhận đang sử dụng trong các tổng giáo pháp hàng ngày, biết đầu tiên, trong dạng việt.</p>
+        <?php
+        if (isset($_SESSION["account"])) {
+        ?>
+        <a href="<?= BASE_URL("Page/Home") ?>" class="nav__statr btn-start">Bắt đầu học</a>
+        <?php
+        } else {
+        ?>
+        <a href="<?= BASE_URL("Auth/DangNhap") ?>" class="nav__statr btn-start">Bắt đầu học</a>
+        <?php
+        }
+        ?>
     </div>
-</div>
-<div class="slider">
-    <div class="grid wide">
-        <div class="slider-wrap">
-            <div class="slider__content">
-                <h1 class="slider__content-heading">Học
+</section>
 
-                    <div style="line-height:0" class="headline-icon"><img src="https://i.imgur.com/HE3eJGR.png" loading="lazy" class="LazyImage__Img-sc-12k26ab-0 eVDYkS"></div>
-                    <div style="line-height:0;top: -40px;right: -40px;" class="headline-icon"><img src="https://i.imgur.com/GF5UgJs.png" loading="lazy" class="LazyImage__Img-sc-12k26ab-0 eVDYkS"></div>
-                    <div style="line-height:0; top: -40px;right: -40px;" class="headline-icon"><img src="https://i.imgur.com/fmKnI8E.png" loading="lazy" class="LazyImage__Img-sc-12k26ab-0 eVDYkS"></div>
-
-                    <span class="slider__content-heading--color">ngoại ngữ</span>
-                    và cải thiện kĩ năng của bản thân bạn
-                </h1>
-                <p class="slider__content-text">Ngoại ngữ hiện đang rất quan trọng trong cuộc sống giao tiếp hằng ngày,
-                    khi đi du lịch, trong công việc</p>
-                <?php
-                if (isset($_SESSION["account"])) {
-                ?>
-                    <a href="<?= BASE_URL("Page/Home") ?>" class="nav__statr btn">Bắt đầu</a>
-                <?php
-                } else {
-                ?>
-                    <a href="<?= BASE_URL("Auth/DangNhap") ?>" class="nav__statr btn">Bắt đầu</a>
-                <?php
-                }
-                ?>
-            </div>
-            <div class="slider__img">
-                <img src="https://i.imgur.com/dGnCisl.png" loading="lazy" alt="<?= $Database->site("TenWeb") . ' - Nền tảng học ngoại ngữ online' ?>" class="image">
-                <img src="https://i.imgur.com/ezm9DcC.png" loading="lazy" alt="<?= $Database->site("TenWeb") . ' - Nền tảng học ngoại ngữ online' ?>" class="image_1">
-                <img src="https://i.imgur.com/aVPB2Ll.png" loading="lazy" alt="<?= $Database->site("TenWeb") . ' - Nền tảng học ngoại ngữ online' ?>" class="image_2">
-                <img src="https://i.imgur.com/nci9dng.png" loading="lazy" alt="<?= $Database->site("TenWeb") . ' - Nền tảng học ngoại ngữ online' ?>" class="image_3">
-
+<div class="container">
+    <!-- Học viện Section -->
+    <section class="section">
+        <div class="flex-container">
+            <div>
+                <h3>Học viện</h3>
+                <p>Khám phá môi trường học tập hiện đại với đội ngũ giảng viên chuyên nghiệp và phương pháp giảng dạy
+                    tiên tiến.</p>
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Học viện" class="illustration floating">
             </div>
         </div>
-    </div>
-    <div class="course">
-        <ul class="course__list">
-            <li class="course__item course_khoahoc">
-                <div class="course__item-number"><?= $soLuongKhoaHoc  ?></div>
-                <div class="course__item-text">KHÓA HỌC</div>
-            </li>
-            <li class="course__item nation course__item--separate">
-                <img src="<?= BASE_URL("/") ?>/assets/img/America.png" alt="<?= $Database->site("TenWeb") . ' - Khóa học tiếng Anh' ?>" class="course__item-img">
-                <div class="course__item-text">TIẾNG ANH</div>
-            </li>
-            <li class="course__item nation">
-                <img src="<?= BASE_URL("/") ?>/assets/img/Japan.png" alt="<?= $Database->site("TenWeb") . ' - Khóa học tiếng Nhật' ?>" class="course__item-img">
-                <div class="course__item-text">TIẾNG NHẬT</div>
-            </li>
-            <li class="course__item course__item--separate course_hocvien">
-                <div class="course__item-number"><?= $soLuongHocVien  ?></div>
-                <div class="course__item-text">HỌC VIÊN</div>
-            </li>
-        </ul>
-    </div>
-</div>
+    </section>
 
-<div class="reason">
-    <div class="grid wide">
-        <h1 class="introduce__heading">Tại sao nên sử dụng <?= $Database->site("TenWeb") ?>?</h1>
-        <div class="why_use_container">
-
-            <div class="reason__content">
-                <div class="reason__warp-img " style="background-color: #A2D6E5;">
-                    <img class="reason__img" src="https://i.imgur.com/Q9GYNuV.png" alt="<?= $Database->site("TenWeb") . ' - Các kỹ thuật ghi nhớ được khoa học chứng minh' ?>">
+    <!-- Tại sao chọn chúng tôi -->
+    <section class="section section-highlight">
+        <h3>Tại sao nên sử dụng HocNgoaiNguBeginner?</h3>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                <p class="reason__text">Các kỹ thuật ghi nhớ được khoa học chứng minh</p>
+                <h4>Phương pháp hiện đại</h4>
+                <p>Các kĩ năng với nhất được khóa học chứng minh. Học nhuận họn gặp hai tần ra với trên lập.</p>
             </div>
-
-
-            <div class="reason__content">
-                <div class="reason__warp-img " style="background-color: #D0C9E7;">
-                    <img class="reason__img" src="https://i.imgur.com/x2hi4Fq.png" alt="<?= $Database->site("TenWeb") . ' - Học nhanh hơn gấp hai lần so với trên lớp' ?>">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <p class="reason__text">Học nhanh hơn gấp hai lần so với trên lớp</p>
+                <h4>Tiến bộ rõ rệt</h4>
+                <p>Học hiệu của đầu mình trong ngày ở cực nhất sau đúng trống ở cực vậy.</p>
             </div>
-
-
-            <div class="reason__content">
-                <div class="reason__warp-img " style="background-color: #8AD6C2;">
-                    <img class="reason__img" src="https://i.imgur.com/9ifba7t.png" alt="<?= $Database->site("TenWeb") . ' - Học bằng cách đắm mình trong ngôn ngữ, như thế bạn đang sống ở đó vậy' ?>">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
                 </div>
-                <p class="reason__text">Học bằng cách đắm mình trong ngôn ngữ, như thế bạn đang sống ở đó vậy.</p>
-            </div>
-
-
-            <div class="reason__content">
-                <div class="reason__warp-img " style="background-color: #F6C2C3;">
-                    <img class="reason__img" src="https://i.imgur.com/lqi2N7I.png" alt="<?= $Database->site("TenWeb") . ' - Bao quát mọi thứ từ những kiến thức thiết yếu cho những chuyến du lịch của bạn tới những mục tiêu dài hạn hơn' ?>">
-                </div>
-                <p class="reason__text">Bao quát mọi thứ từ những kiến thức thiết yếu cho những chuyến du lịch của
-                    bạn tới những mục tiêu dài hạn hơn</p>
-
+                <h4>Cộng đồng hỗ trợ</h4>
+                <p>Hàng nghìn học viên đã thành công với phương pháp của chúng tôi.</p>
             </div>
         </div>
-    </div>
-</div>
-<div class="introduce">
-    <div class="grid wide">
-        <h1 class="introduce__heading">Học miễn phí, mọi lúc mọi nơi</h1>
-        <div class="introduce_platform">
+    </section>
 
-            <div class="introduce__content">
-                <div class="introduce__wrap-img">
-                    <img src="<?= BASE_URL("/") ?>/assets/img/menu.png" alt="<?= $Database->site("TenWeb") . ' - Lộ trình học tập được xây dựng cho riêng bạn' ?>" class="introduce__content-img">
-                </div>
-                <h3 class="introduce__content-heading">Lộ trình học tập</h3>
-                <p class="introduce__content-text">Lộ trình học tập được xây dựng cho riêng bạn</p>
+    <!-- Học miễn phí -->
+    <section class="section">
+        <h3>Học miễn phí, mọi lúc mọi nơi</h3>
+        <div class="features">
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Lộ trình học tập" class="illustration">
+                <h4>Lý trình học tập</h4>
+                <p>Lý trình học tập được xây dựng cho riêng bạn</p>
             </div>
-
-
-            <div class="introduce__content">
-                <div class="introduce__wrap-img">
-                    <img src="<?= BASE_URL("/") ?>/assets/img/book.png" alt="<?= $Database->site("TenWeb") . ' - Danh sách từ vựng phong phú và thiết thực' ?>" class="introduce__content-img">
-                </div>
-                <h3 class="introduce__content-heading">Bổ sung từ vựng</h3>
-                <p class="introduce__content-text">Danh sách từ vựng phong phú và thiết thực</p>
-            </div>
-
-
-            <div class="introduce__content">
-                <div class="introduce__wrap-img">
-                    <img src="<?= BASE_URL("/") ?>/assets/img/free.png" alt="<?= $Database->site("TenWeb") . ' - Nền tảng miễn phí, bất cứ ai cũng có thể học, nó là miễn phí' ?>" class="introduce__content-img">
-                </div>
-                <h3 class="introduce__content-heading">Nền tảng miễn phí</h3>
-                <p class="introduce__content-text">Bất cứ ai cũng có thể học, nó là miễn phí</p>
-
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Từ vựng" class="illustration">
+                <h4>Từ vựng phong phú</h4>
+                <p>Bắt đầu với vựng Danh kinh tế trong ngày ở cực nhất được</p>
             </div>
         </div>
-    </div>
-</div>
-<div style="
- 
-    margin-top: 90px;
-    padding: 40px 0px;
-">
-    <div class="introduce_website">
-        <div class="introduce_website-left">
+    </section>
 
-            <h1 class="introduce__heading">Nhiều từ vựng được dịch nghĩa chính xác nhất</h1>
-            <p class="support-browser__content">Khác với các từ điển thông thường. Chúng tôi xây dựng từ điển của mình theo hướng người Việt giúp mang lại từ vựng có nghĩa chính xác nhất theo định nghĩa tiếng Việt.</p>
-        </div>
-        <div class="introduce_website-right">
-            <img src="https://i.imgur.com/aDm5Pgc.png" alt="<?= $Database->site("TenWeb") . ' - Nhiều từ vựng được dịch nghĩa chính xác nhất' ?>" />
-        </div>
-    </div>
-</div>
-<div style="
- 
-    margin-top: 90px;
-    padding: 40px 0px;
-">
-    <div class="introduce_website">
-        <div class="introduce_website-right">
-            <img src="https://i.imgur.com/RjfROrU.png" alt="<?= $Database->site("TenWeb") . ' - Ví dụ cụ thể cho từng từ' ?>" />
-        </div>
-        <div class="introduce_website-left">
-            <h1 class="introduce__heading">Ví dụ cụ thể cho từng từ</h1>
-            <p class="support-browser__content">Với mỗi từ tiếng Anh sẽ có 1-2 ví dụ tương ứng, giúp các bạn nắm được cách mà từ này được sử dụng trong câu ứng với ngữ cảnh thực tế.</p>
-        </div>
+    <!-- Từ vựng chính xác -->
+    <section class="section">
+        <h3>Nhiều từ vựng được dịch nghĩa chính xác nhất</h3>
+        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            alt="Từ vựng chính xác" class="illustration floating"
+            style="float: right; margin-left: 30px; max-width: 50%;">
+        <p>Khác với các từ điện thông thường, Chống tất xây dựng từ điện thông thường người tập thương lại từ vựng có
+            nghị chính xác nhất than đến nghịnh nộp việc.</p>
+        <p>Chúng tôi cung cấp hệ thống từ điển chuyên sâu với hàng nghìn ví dụ thực tế, giúp bạn hiểu rõ ngữ cảnh sử
+            dụng của từng từ vựng.</p>
+        <div style="clear: both;"></div>
+    </section>
 
-    </div>
-</div>
-<div class="comment-slider">
-    <h1 class="introduce__heading">Học viên nói gì về <?= $Database->site("TenWeb") ?></h1>
-    <div class="grid wide">
-        <div class="comment-slider__list">
-            <?php
+    <!-- Ví dụ cụ thể -->
+    <section class="section">
+        <h3>Ví dụ cụ thể cho từng từ</h3>
+        <div class="features">
+            <div class="feature">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                    alt="Học nhóm" class="illustration">
+                <p>Với nhất đối với cấp danh kinh tế và các tổng giáo pháp, giấy các lựa nhất được cho hai vào đồng thời
+                    từ vựng trong đối sống với ngữ danh thực tế.</p>
+            </div>
+        </div>
+    </section>
 
-            foreach ($Database->get_list(" select * from danhgiakhoahoc A inner join nguoidung B on A.TaiKhoan = B.TaiKhoan order by A.ThoiGian desc limit 9") as $danhGiaKhoaHoc) {
-
-            ?>
-                <div class="comment-item">
-                    <div class="comment-item__wrap">
-                        <div class="comment-left">
-                            <img src="<?= $danhGiaKhoaHoc["AnhDaiDien"] ?>" alt="<?= $danhGiaKhoaHoc["TenHienThi"] ?>" class="comment-left__img">
-                            <p class="comment-left__text"><?= $danhGiaKhoaHoc["NoiDungDanhGia"] ?></p>
-                            <div class="comment-left__name"><?= $danhGiaKhoaHoc["TenHienThi"] ?></div>
-                            <div class="comment-item__balloon--left"></div>
-                        </div>
-                        <div class="comment-right">
-                            <div class="comment-right-person">
-                                <img src="<?= BASE_URL("/") ?>/assets/img/Trung.png" alt="Học viên của <?= $Database->site("TenWeb") ?>" class="comment-right-person__img">
-                                <div class="comment-right-person__wrap-content">
-                                    <p class="comment-right-person__text">Ứng dụng hay và học tiếng anh rất tốt, tôi thích
-                                        nó! Arigathank</p>
-                                    <div class="comment-right-person__name">Nguyễn Đức Trung</div>
-                                </div>
-                                <div class="comment-item__balloon--right"></div>
-                            </div>
-                            <div class="comment-right-person">
-                                <img src="<?= BASE_URL("/") ?>/assets/img/Quynh.png" alt="Học viên của <?= $Database->site("TenWeb") ?>" class="comment-right-person__img">
-                                <div class="comment-right-person__wrap-content">
-                                    <p class="comment-right-person__text">Nhờ có trang web này, tôi đã có thể đi xuất ngoại
-                                        với mức lương ngàn đô</p>
-                                    <div class="comment-right-person__name">Lê Thanh Quỳnh</div>
-                                </div>
-                                <div class="comment-item__balloon--right"></div>
-                            </div>
-                        </div>
+    <!-- Đánh giá học viên -->
+    <section class="section">
+        <h3>Học viên nói gì về HocNgoaiNguBeginner</h3>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>Bài học rất hay, phương pháp dạy dễ hiểu. Tôi đã cải thiện trình độ ngoại ngữ chỉ sau 3 tháng.</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Nguyễn Thị A">
+                    <div>
+                        <h4>Nguyễn Thị A</h4>
+                        <p>Sinh viên</p>
                     </div>
                 </div>
-            <?php
-            }
-            ?>
-
-
-
-        </div>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js">
-        </script>
-        <script src="<?= BASE_URL("/") ?>/assets/javascript/comment-slider.js?t=<?= rand(0, 99999) ?>"></script>
-    </div>
-</div>
-
-<div style="
-    background-color: #FAFCFF;
-    margin-top: 90px;
-    padding: 40px 0px;
-">
-    <div class="support-browser">
-        <h1 class="introduce__heading">Các trình duyệt hỗ trợ</h1>
-        <p class="support-browser__content">Nền tảng học ngoại ngữ <?= $Database->site("TenWeb") ?> hỗ trợ có thể tương tác với tất cả các trình duyệt máy tính để bàn và thiết bị di động hiện đại, và đã được kiểm tra kỹ lưỡng để đạt được hiệu suất và độ tin cậy trong phạm vi trình duyệt rộng nhất có thể.</p>
-        <div class="support-browser__list-browser">
-            <div class="support-browser__item">
-                <img src="https://i.imgur.com/Dp6UTr8.png" alt="<?= $Database->site("TenWeb") ?> - Học trên Firefox" class="support-browser__item-img">
-                <div class="support-browser__item-name">Firefox</div>
             </div>
-            <div class="support-browser__item">
-                <img src="<?= BASE_URL("/") ?>/assets/img/chrome.svg" alt="<?= $Database->site("TenWeb") ?> - Học trên Chrome" class="support-browser__item-img">
-                <div class="support-browser__item-name">Chrome</div>
-            </div>
-            <div class="support-browser__item">
-                <img src="<?= BASE_URL("/") ?>/assets/img/safari.svg" alt="<?= $Database->site("TenWeb") ?> - Học trên Safari" class="support-browser__item-img">
-                <div class="support-browser__item-name">Safari</div>
-            </div>
-            <div class="support-browser__item">
-                <img src="<?= BASE_URL("/") ?>/assets/img/opera.svg" alt="<?= $Database->site("TenWeb") ?> - Học trên Opera" class="support-browser__item-img">
-                <div class="support-browser__item-name">Opera</div>
+            <div class="testimonial">
+                <p>Admin rất nhiệt tình hỗ trợ. Nội dung bài học phong phú và thực tế.</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Trần Văn B">
+                    <div>
+                        <h4>Trần Văn B</h4>
+                        <p>Nhân viên văn phòng</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="info">
-    <div class="info-wrap">
-        <h1 class="introduce__heading" style="color: #fff">Nhận thông tin mới nhất từ chúng tôi</h1>
-        <div class="info-wrap-form">
-            <input type="email" placeholder="Nhập email của bạn vào đây" class="info__input">
-            <div class="btn">
-                Đăng ký
+    </section>
 
+    <!-- Trình duyệt hỗ trợ -->
+    <section class="section">
+        <h3>Các trình duyệt hỗ trợ</h3>
+        <p>HocNgoaiNguBeginner hoạt động trên mọi trình duyệt hiện đại: Chrome, Firefox, Safari, Edge.</p>
+        <div class="features" style="margin-top: 30px;">
+            <div class="feature" style="background: transparent; box-shadow: none;">
+                <i class="fab fa-chrome" style="font-size: 3rem; color: #4285F4;"></i>
+                <h4>Chrome</h4>
+            </div>
+            <div class="feature" style="background: transparent; box-shadow: none;">
+                <i class="fab fa-firefox" style="font-size: 3rem; color: #FF7139;"></i>
+                <h4>Firefox</h4>
+            </div>
+            <div class="feature" style="background: transparent; box-shadow: none;">
+                <i class="fab fa-safari" style="font-size: 3rem; color: #1B73E8;"></i>
+                <h4>Safari</h4>
             </div>
         </div>
-    </div>
+    </section>
 </div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Giới thiệu</h3>
+                <ul>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Đội ngũ giảng viên</a></li>
+                    <li><a href="#">Phương pháp giảng dạy</a></li>
+                    <li><a href="#">Trợ giúp và hỗ trợ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Khóa học</h3>
+                <ul>
+                    <li><a href="#">Tiếng Anh cơ bản</a></li>
+                    <li><a href="#">Tiếng Anh giao tiếp</a></li>
+                    <li><a href="#">Luyện thi chứng chỉ</a></li>
+                    <li><a href="#">Tiếng Anh chuyên ngành</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Liên kết</h3>
+                <ul>
+                    <li><a href="#">Blog học tập</a></li>
+                    <li><a href="#">Tài liệu miễn phí</a></li>
+                    <li><a href="#">Câu hỏi thường gặp</a></li>
+                </ul>
+
+                <h3 style="margin-top: 30px;">Theo dõi chúng tôi</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2023 HocNgoaiNguBeginner - Nền tảng học ngoại ngữ online. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
 <script>
-    anime({
-        targets: '.headline-icon',
-        scale: 1.2,
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutSine'
+// JavaScript nâng cao
+document.addEventListener('DOMContentLoaded', function() {
+    // Hiệu ứng scroll
+    const sections = document.querySelectorAll('.section');
+
+    function checkScroll() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (sectionTop < windowHeight * 0.75) {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    // Khởi tạo trạng thái ban đầu
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(50px)';
+        section.style.transition = 'all 0.6s ease-out';
     });
 
-    anime({
-        targets: '.image_1',
+    // Kiểm tra ngay khi tải trang
+    checkScroll();
 
-        direction: 'alternate',
-        loop: true,
-        keyframes: [{
-                translateY: -40,
-                scale: 1.5,
-            },
-            {
-                translateY: 40,
-                scale: 1,
-            },
+    // Thêm sự kiện scroll
+    window.addEventListener('scroll', checkScroll);
 
-        ],
-        duration: 4000,
-        easing: 'easeInOutSine'
+    // Xử lý nút
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Hiệu ứng nhấp nháy
+            button.style.animation = 'none';
+            void button.offsetWidth; // Trigger reflow
+            button.style.animation = 'pulse 0.5s';
+
+            // Chuyển hướng sau 0.5s
+            setTimeout(() => {
+                window.location.href = '#';
+            }, 500);
+        });
     });
-    anime({
-        targets: '.image_2',
-        scale: 1.2,
 
-        keyframes: [{
-                translateX: -40
-            },
-
-            {
-                translateX: 40
-            },
-
-        ],
-        duration: 4000,
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutSine'
-    });
-    anime({
-        targets: '.image_3',
-
-        keyframes: [{
-                opacity: 0,
-                scale: 1.4,
-                translateY: -40
-            },
-
-            {
-                opacity: 1,
-                scale: 1,
-                translateY: 0
-            },
-
-        ],
-        duration: 4000,
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutSine'
-    });
+    // Thêm style cho hiệu ứng pulse
+    const style = document.createElement('style');
+    style.textContent = `
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+            `;
+    document.head.appendChild(style);
+});
 </script>
-
-
-
-<?php
-require_once(__DIR__ . "/public/client/footer_about.php");
-
-require_once(__DIR__ . "/public/client/footer.php");
-
-?>
