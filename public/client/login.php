@@ -7,7 +7,7 @@ $META_TITLE = "5Fs Group - Đăng nhập tài khoản";
 $META_IMAGE = "https://i.imgur.com/LMiRDR5.png";
 $META_DESCRIPTION = "5Fs Group - Đăng nhập tài khoản";
 $META_SITE = BASE_URL("Auth/DangNhap");
-require_once(__DIR__ . "/../../public/client/header.php");
+require_once(__DIR__ . "/../../public/client/header-home.php");
 if (isset($_SESSION["account"])) {
     $row = $Database->get_row("SELECT * FROM `dangkykhoahoc` WHERE `TaiKhoan` = '" . $_SESSION["account"] . "'  ");
     if (!$row) {
@@ -24,75 +24,78 @@ if (isset($_SESSION["account"])) {
 
 // Login with Google
 
-$client = new Google_Client();
-$client->setClientId(GOOGLE_APP_ID);
-$client->setClientSecret(GOOGLE_APP_SECRET);
-$client->setRedirectUri(GOOGLE_APP_CALLBACK_URL);
-$client->addScope("email");
-$client->addScope("profile");
+// $client = new Google_Client();
+// $client->setClientId(GOOGLE_APP_ID);
+// $client->setClientSecret(GOOGLE_APP_SECRET);
+// $client->setRedirectUri(GOOGLE_APP_CALLBACK_URL);
+// $client->addScope("email");
+// $client->addScope("profile");
 
 
 // Login with Facebook
-$fb = new Facebook\Facebook([
-    'app_id' => FACEBOOK_APP_ID,
-    'app_secret' => FACEBOOK_APP_SECRET,
-    'default_graph_version' => 'v2.5',
-]);
-$helper = $fb->getRedirectLoginHelper();
-$permissions = ['email']; // optional
-$loginFacebookUrl = $helper->getLoginUrl(FACEBOOK_APP_CALLBACK_URL, $permissions);
+// $fb = new Facebook\Facebook([
+//     'app_id' => FACEBOOK_APP_ID,
+//     'app_secret' => FACEBOOK_APP_SECRET,
+//     'default_graph_version' => 'v2.5',
+// ]);
+// $helper = $fb->getRedirectLoginHelper();
+// $permissions = ['email']; // optional
+// $loginFacebookUrl = $helper->getLoginUrl(FACEBOOK_APP_CALLBACK_URL, $permissions);
 
 ?>
 <style>
-    <?= include_once(__DIR__ . "/../../assets/css/login.css");
-    ?><?= include_once(__DIR__ . "/../../assets/css/main.css");
-        ?>
+<?=include_once(__DIR__ . "/../../assets/css/login.css");
+?>
 </style>
-
-<div class="header">
-    <div class="grid wide">
-        <div class="header_wrap">
-            <a href="<?= BASE_URL("/") ?>">
-                <h2 class="header__name"><?= $Database->site("TenWeb") ?></h2>
-            </a>
-            <div class="nav">
-                <a href="" class="nav__course">Các khóa học</a>
-                <a href="<?= BASE_URL("Auth/DangNhap") ?>" class="nav__statr btn">Bắt đầu học</a>
-            </div>
-        </div>
+<div class="login-container">
+    <div class="login-header">
+        <a href="<?= BASE_URL("/") ?>" style="text-decoration: none; color: wheat">
+            <h1 class=" header__name"><?= $Database->site("TenWeb") ?></h1>
+        </a>
+        <p class="login-description">
+            Cùng chinh phục ngôn ngữ mới dễ dàng và hiệu quả.
+        </p>
     </div>
-</div>
-<div class="container" style="
-    margin: 150px auto;
-">
-    <div class="grid wide">
-        <form class="form" action="" id="form">
-            <div class="form__title">Đăng nhập</div>
-            <div id="thongbao"></div>
-            <input type="text" placeholder="Tên đăng nhập" class="form__account" id="account">
-            <div class="form__password">
-                <input type="password" class="input_password" placeholder="Mật khẩu" id="password" />
-                <div id="show">Show</div>
+
+    <div class="login-body">
+        <form id="form">
+            <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" placeholder="Tên đăng nhập" id="account" class="input-field"
+                    placeholder="Nhập tên đăng nhập">
             </div>
 
-            <a href="<?= BASE_URL("Auth/QuenMatKhau") ?>" class="form__forget-password">Quên mật khẩu?</a>
-            <button type="submit" id="btnLogin" class="form__login btn">ĐĂNG NHẬP</button>
-            <!-- <span class="form__separate-text">HOẶC</span>
-            <div class="form__separate"></div>
-            <div class="wrap-social">
-                <a href="<?= $loginFacebookUrl  ?>" class="social__item"><img src="<?= BASE_URL("/") ?>/assets/img/facebook.svg" alt="" class="social__item-img"><span class="social__item-text">FACEBOOK</span></a>
-                <a href=<?= $client->createAuthUrl() ?> class="social__item"><img src="<?= BASE_URL("/") ?>/assets/img/google.svg" alt="" class="social__item-img"><span class="social__item-text">GOOGLE</span></a>
-            </div> -->
-            <div class="form__not-account">
-                Chưa có tài khoản? <a href="<?= BASE_URL("Auth/DangKy") ?>" class="form__not-account-link">Đăng kí ngay</a>
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" placeholder="Mật khẩu" id="password" class="input-field"
+                    placeholder="Nhập mật khẩu" required>
+                <button type="button" class="password-toggle" id="togglePassword">
+                    <i class="far fa-eye"></i>
+                </button>
             </div>
 
+            <a href="#" class="forgot-password">Quên mật khẩu?</a>
 
+            <button type="submit" id="btnLogin" class="login-btn">ĐĂNG NHẬP</button>
+
+            <div class="signup-link">
+                Chưa có tài khoản? <a href="<?= BASE_URL("Auth/DangKy") ?>">Đăng ký ngay</a>
+            </div>
         </form>
     </div>
 </div>
-<script src="<?= BASE_URL("/") ?>/assets/javascript/show-password.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+    // Hiển thị/ẩn mật khẩu
+    $('#togglePassword').on('click', function() {
+        const passwordField = $('#password');
+        const isPassword = passwordField.attr('type') === 'password';
+        passwordField.attr('type', isPassword ? 'text' : 'password');
+        $(this).html(isPassword ? '<i class="far fa-eye-slash"></i>' : '<i class="far fa-eye"></i>');
+    });
+
     $(document).ready(function() {
         $("#form").submit(function(e) {
             e.preventDefault();
@@ -118,6 +121,7 @@ $loginFacebookUrl = $helper->getLoginUrl(FACEBOOK_APP_CALLBACK_URL, $permissions
             }
         });
     });
+});
 </script>
 <?php
 require_once(__DIR__ . "/../../public/client/footer.php"); ?>
